@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>نظام البطل</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="نظام البطل">
+<meta name="theme-color" content="#080C14">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -396,7 +399,7 @@ body::after { content:''; position:fixed; inset:0; background-image:linear-gradi
         <div style="font-family:'Cairo',sans-serif;font-size:19px;font-weight:700">الزواج خلال عامين</div>
         <div style="margin-top:12px;padding:10px;background:rgba(30,144,255,0.07);border-radius:10px;border:1px solid rgba(30,144,255,0.18)">
           <div style="font-size:11px;color:var(--text-dim)">المتبقي تقريباً</div>
-          <div style="font-family:'Cairo',sans-serif;font-size:24px;font-weight:900;color:var(--blue)">730 يوم</div>
+          <div style="font-family:'Cairo',sans-serif;font-size:24px;font-weight:900;color:var(--blue)" id="marriage-counter">730 يوم</div>
         </div>
       </div>
     </div>
@@ -724,6 +727,16 @@ function showToast(msg) {
   setTimeout(()=>t.classList.remove('show'),3000);
 }
 
+// Marriage counter
+function updateMarriage() {
+  const target = new Date("2028-05-24");
+  const now = new Date();
+  const diff = Math.ceil((target - now) / (1000 * 60 * 60 * 24));
+  const el = document.getElementById("marriage-counter");
+  if(el) el.textContent = (diff > 0 ? diff : 0) + " يوم";
+}
+updateMarriage();
+setInterval(updateMarriage, 60000);
 init();
 </script>
 </body>
